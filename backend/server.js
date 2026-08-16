@@ -1,12 +1,11 @@
-require('dotenv').config();
+require("dotenv").config();
 const app = require("./src/app");
-const connectToDb = require('./src/db/db')
-const {createServer} = require('http')
+const connectToDb = require("./src/db/db");
+const { createServer } = require("http");
 const initializeSocket = require("./src/socket/socket.server");
 
 const httpServer = createServer(app);
 initializeSocket(httpServer);
-
 
 connectToDb();
 

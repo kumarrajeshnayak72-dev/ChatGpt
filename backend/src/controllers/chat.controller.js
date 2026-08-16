@@ -1,8 +1,7 @@
-const chatModel = require('../models/chat.model')
+const chatModel =  require('../models/chat.model')
 
-async function createChat(req,res) {
-    const {title} =  req.body;
-
+const userChat = async (req,res) => {
+    const{title} = req.body;
     const user = req.user;
 
     const chat = await chatModel.create({
@@ -10,10 +9,10 @@ async function createChat(req,res) {
         title
     })
 
-    res.json({
-        message:"Chat Created Successfull",
-        user
-    })
+    return res.status(201).json({
+      message: "Chat Created Successfully",
+      chat,
+    });
 }
 
-module.exports = createChat
+module.exports = {userChat}

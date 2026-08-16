@@ -41,7 +41,7 @@ const loginUser =  async (req, res) => {
 
     const user = await userModel.findOne({email});
     if(!user){
-        res.status(401).json({
+       return res.status(401).json({
           message: "User Not Found",
         });
     }
@@ -61,6 +61,8 @@ const loginUser =  async (req, res) => {
 
 
 }
+
+
 
 module.exports = {
   registerUser,
