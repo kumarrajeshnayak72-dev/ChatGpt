@@ -13,4 +13,18 @@ async function generateResponse(content) {
   return response.text;
 }
 
-module.exports = generateResponse;
+async function generateEmbaded(content) {
+  const response = await ai.models.embedContent({
+    model: "gemini-embedding-2",
+    contents: content,
+    config:{
+      outputDimensionality:768
+    }
+  });
+  return response.embeddings;
+}
+
+module.exports = {
+  generateResponse,
+  generateEmbaded,
+};

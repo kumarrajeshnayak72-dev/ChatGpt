@@ -2,7 +2,8 @@ const { Server } = require("socket.io");
 const cookie = require("cookie");
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/user.model");
-const generateResponse = require("../services/ai.service");
+const {generateResponse, generateEmbaded} = require("../services/ai.service");
+const {createMemory, queryMemory} =  require('../services/vector.service')
 const messageModel = require('../models/message.model')
 
 function initializeSocket(httpServer) {
@@ -39,6 +40,10 @@ function initializeSocket(httpServer) {
         content:data.content,
         role:"user"
       })
+
+      const vectors = await generateEmbaded(data.content);
+      console.log(vectors);
+      
 
       const chatHistory = (await messageModel.find({
         chat:data.chat
